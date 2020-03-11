@@ -16,7 +16,7 @@ steps:
     command: 'pull'
     artifactoryService: 'Artifactoryamith'
     sourceRepo: 'docker'
-    imageName: 'hello-world/'
+    imageName: 'amithmutakari-docker.jfrog.io/hello-world/'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
