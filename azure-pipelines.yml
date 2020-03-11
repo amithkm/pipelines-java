@@ -13,7 +13,7 @@ pool:
 steps:
 - task: ArtifactoryDocker@1
   inputs:
-    command: 'push'
+    command: 'pull'
     artifactoryService: 'Artifactoryamith'
     targetRepo: 'docker'
     imageName: 'centos'
