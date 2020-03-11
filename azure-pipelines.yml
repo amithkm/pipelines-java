@@ -21,6 +21,16 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: ArtifactoryMaven@1
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'install'
+    artifactoryResolverService: 'Artifactoryamith'
+    targetResolveReleaseRepo: 'libs-release'
+    targetResolveSnapshotRepo: 'libs-snapshot'
+    artifactoryDeployService: 'Artifactoryamith'
+    targetDeployReleaseRepo: 'libs-release-local'
+    targetDeploySnapshotRepo: 'libs-snapshot-local'
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
     artifactoryService: 'Artifactoryamith'
