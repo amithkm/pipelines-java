@@ -11,26 +11,32 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
+- task: ArtifactoryGenericDownload@2
   inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-- task: ArtifactoryMaven@1
+    connection: 'Artifactoryamith'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+        "files": [
+          {
+            "pattern": "mongodb*",
+            "target": "generic-local"
+          }
+        ]
+      }
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    failNoOp: true
+- task: ArtifactoryDocker@1
   inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'install'
-    artifactoryResolverService: 'Artifactoryamith'
-    targetResolveReleaseRepo: 'libs-release'
-    targetResolveSnapshotRepo: 'libs-snapshot'
-    artifactoryDeployService: 'Artifactoryamith'
-    targetDeployReleaseRepo: 'libs-release-local'
-    targetDeploySnapshotRepo: 'libs-snapshot-local'
+    command: 'push'
+    artifactoryService: 'Artifactoryamith'
+    targetRepo: 'docker-local'
+    imageName: 'hello-world'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
     artifactoryService: 'Artifactoryamith'
