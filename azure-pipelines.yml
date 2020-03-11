@@ -16,7 +16,7 @@ steps:
     command: 'push'
     artifactoryService: 'Artifactoryamith'
     targetRepo: 'docker'
-    imageName: 'hello-world'
+    imageName: 'centos'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
