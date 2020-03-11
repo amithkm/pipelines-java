@@ -15,7 +15,7 @@ steps:
   inputs:
     command: 'push'
     artifactoryService: 'Artifactoryamith'
-    targetRepo: 'docker-local'
+    targetRepo: 'docker'
     imageName: 'hello-world'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
