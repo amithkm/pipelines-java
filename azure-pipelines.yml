@@ -15,11 +15,12 @@ steps:
   inputs:
     command: 'pull'
     artifactoryService: 'Artifactoryamith'
-    targetRepo: 'docker'
+    sourceRepo: 'docker'
     imageName: 'centos'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
     artifactoryService: 'Artifactoryamith'
